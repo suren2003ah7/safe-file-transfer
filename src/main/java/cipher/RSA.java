@@ -1,4 +1,4 @@
-package cipher;
+package main.java.cipher;
 
 public class RSA {
     private Long[] publicKey;
