@@ -3,14 +3,19 @@ package main.java.signatures;
 import main.java.Hash;
 import main.java.Utility;
 
+import java.util.Objects;
+
 public class DSA {
     private Long privateKey;
 
     private Long[] publicKey;
 
     public DSA(){
-        long prime = 4L;
-        long root = 3L;
+        this(Utility.generatePrime());
+    }
+
+    public DSA(Long prime){
+        Long root = Utility.findPrimitiveRoot(prime);
         privateKey = (long) Math.floor(Math.random() * (prime - 3)) + 2;
         publicKey = new Long[]{
                 (long) (Math.pow(root, privateKey) % prime),
@@ -29,15 +34,35 @@ public class DSA {
         return S;
     }
 
-    public boolean verify(String text, Long[] publicKey, Long[] S){
-        return true;
+    public boolean verify(String text, Long[] senderPublicKey, Long[] S){
+        if (!arePrimeAndRootValid(senderPublicKey))
+            throw new IllegalArgumentException("Shared data is incorrect");
+        Long hash = Hash.hash(text, senderPublicKey[1]);
+        Long V1 = (long) (Math.pow(senderPublicKey[2], hash) % senderPublicKey[1]);
+        Long V2 = (long) (
+                ((Math.pow(senderPublicKey[0], S[0]) % senderPublicKey[1]) *
+                        (Math.pow(S[0], S[1]) % senderPublicKey[1])) % senderPublicKey[1]
+        );
+        return Objects.equals(V1, V2);
+    }
+
+    public Long[] getPublicKey(){
+        return publicKey;
+    }
+
+    private boolean arePrimeAndRootValid(Long[] senderPublicKey){
+        return Objects.equals(senderPublicKey[1], publicKey[1]) && Objects.equals(senderPublicKey[2], publicKey[2]);
     }
 
     private Long generateK(){
-        return null;
+        while (true){
+            Long K = (long) (Math.floor(Math.random() * (publicKey[1] - 1)) + 1);
+            if (isKValid(K))
+                return K;
+        }
     }
 
-    private boolean validateK(){
+    private boolean isKValid(Long K){
         return false;
     }
 }
