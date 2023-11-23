@@ -13,6 +13,9 @@ public class Utility {
         return null;
     }
 
+    public static void main(String[] args) {
+        System.out.println(gcd(14, 24));
+    }
     public static Long calculateInverse(Long n, Long modulo){
 //        do the prime factorization
     return null;
