@@ -9,9 +9,6 @@ public class Utility {
         return list.get(index);
     }
 
-    public static void main(String[] args) {
-        System.out.println(generatePrime());
-    }
     public static Long findPrimitiveRoot(Long prime){
         return null;
     }
@@ -19,6 +16,12 @@ public class Utility {
     public static Long calculateInverse(Long n, Long modulo){
 //        do the prime factorization
     return null;
+    }
+
+//    Method to compute GCD of two integers
+    public static long gcd(long a, long b){
+        if (b == 0) return a;
+        return gcd(b, a % b);
     }
 
 //    Utility to generate first n prime numbers
