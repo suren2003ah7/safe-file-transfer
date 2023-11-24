@@ -6,9 +6,9 @@ import main.java.Utility;
 import java.util.Objects;
 
 public class DSA {
-    private Long privateKey;
+    private final Long privateKey;
 
-    private Long[] publicKey;
+    private final Long[] publicKey;
 
     public DSA(){
         this(Utility.generatePrime());
