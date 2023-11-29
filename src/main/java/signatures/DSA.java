@@ -2,6 +2,7 @@ package main.java.signatures;
 
 import main.java.Hash;
 import main.java.Utility;
+import main.java.exception.IncorrectSharedDataException;
 
 import java.util.Objects;
 
@@ -36,7 +37,7 @@ public class DSA {
 
     public boolean verify(String text, Long[] senderPublicKey, Long[] signature){
         if (!arePrimeAndRootValid(senderPublicKey))
-            throw new IllegalArgumentException("Shared data is incorrect");
+            throw new IncorrectSharedDataException();
         Long hash = Hash.hash(text, senderPublicKey[1]);
         Long V1 = Utility.power(senderPublicKey[2], hash, senderPublicKey[1]);
         Long V2 = Utility.multiply(

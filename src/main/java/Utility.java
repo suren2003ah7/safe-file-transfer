@@ -1,4 +1,6 @@
 package main.java;
+import main.java.exception.FieldNotPrimeException;
+
 import java.util.ArrayList;
 
 public class Utility {
@@ -10,7 +12,7 @@ public class Utility {
     }
 
     public static Long findPrimitiveRoot(Long prime){
-        if (!isPrime(prime)) throw new IllegalArgumentException(prime + " is not a prime number");
+        if (!isPrime(prime)) throw new FieldNotPrimeException(prime + " is not a prime number");
         boolean fl = false;
         for (long i = 2; i <= prime - 1; i++){
             for (long exponent = 2; exponent < prime; exponent++){
