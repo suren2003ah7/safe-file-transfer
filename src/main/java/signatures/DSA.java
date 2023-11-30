@@ -26,6 +26,8 @@ public class DSA {
     }
 
     public Long[] sign(String text){
+        if (!Utility.isMessageValid(text))
+            throw new IllegalArgumentException("Message should only contain ASCII characters");
         Long[] signature = new Long[2];
         Long hash = Hash.hash(text, publicKey[1]);
         Long K = generateK();
@@ -38,6 +40,8 @@ public class DSA {
     public boolean verify(String text, Long[] senderPublicKey, Long[] signature){
         if (!arePrimeAndRootValid(senderPublicKey))
             throw new IncorrectSharedDataException();
+        if (!Utility.isMessageValid(text))
+            throw new IllegalArgumentException("Message should only contain ASCII characters");
         Long hash = Hash.hash(text, senderPublicKey[1]);
         Long V1 = Utility.power(senderPublicKey[2], hash, senderPublicKey[1]);
         Long V2 = Utility.multiply(

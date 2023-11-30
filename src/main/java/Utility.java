@@ -77,6 +77,13 @@ public class Utility {
         return sb.toString();
     }
 
+    public static boolean isMessageValid(String message) {
+        for (int i = 0; i < message.length(); i++)
+            if (message.charAt(i) >= 128)
+                return false;
+        return true;
+    }
+
 //    Utility to generate first n prime numbers
     private static ArrayList<Long> firstNPrimes(long n){
         ArrayList<Long> primes = new ArrayList<>();
