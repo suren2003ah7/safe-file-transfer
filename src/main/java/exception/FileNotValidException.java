@@ -3,7 +3,7 @@ package main.java.exception;
 import java.io.IOException;
 
 public class FileNotValidException extends IOException {
-    public FileNotValidException(){
+    public FileNotValidException() {
         super("File can only consist of ASCII characters");
     }
 

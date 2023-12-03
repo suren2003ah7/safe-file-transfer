@@ -1,5 +1,6 @@
 package main.java;
 import main.java.exception.FieldNotPrimeException;
+import main.java.exception.NoPrimitiveRootException;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class Utility {
             }
             if (fl) return i;
         }
-        throw new IllegalArgumentException("Primitive root cannot be found");
+        throw new NoPrimitiveRootException();
     }
 
     public static Long calculateInverse(Long n, Long modulo){

@@ -3,6 +3,7 @@ package main.java.signatures;
 import main.java.Hash;
 import main.java.Utility;
 import main.java.exception.IncorrectSharedDataException;
+import main.java.exception.MessageNotValidException;
 
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class DSA {
 
     public Long[] sign(String text){
         if (!Utility.isMessageValid(text))
-            throw new IllegalArgumentException("Message should only contain ASCII characters");
+            throw new MessageNotValidException();
         Long[] signature = new Long[2];
         Long hash = Hash.hash(text, publicKey[1]);
         Long K = generateK();
@@ -41,7 +42,7 @@ public class DSA {
         if (!arePrimeAndRootValid(senderPublicKey))
             throw new IncorrectSharedDataException();
         if (!Utility.isMessageValid(text))
-            throw new IllegalArgumentException("Message should only contain ASCII characters");
+            throw new MessageNotValidException();
         Long hash = Hash.hash(text, senderPublicKey[1]);
         Long V1 = Utility.power(senderPublicKey[2], hash, senderPublicKey[1]);
         Long V2 = Utility.multiply(
