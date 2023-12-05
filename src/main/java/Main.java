@@ -120,11 +120,11 @@ public class Main {
                     break;
                 case 7:
                     Long[] rsaPublicKey = rsa.getPublicKey();
-                    printLongArray(rsaPublicKey);
+                    System.out.println(Utility.longArrayToString(rsaPublicKey));
                     break;
                 case 8:
                     Long[] dsaPublicKey = dsa.getPublicKey();
-                    printLongArray(dsaPublicKey);
+                    System.out.println(Utility.longArrayToString(dsaPublicKey));
                     break;
                 case 9:
                     break main;
@@ -153,11 +153,6 @@ public class Main {
             default:
                 System.out.println(INVALID_INPUT);
         }
-    }
-
-    private static void printLongArray(Long[] arr){
-        for (Long aLong : arr)
-            System.out.println(aLong.toString());
     }
 
     private static boolean verify(String message, Long[] signature) {
