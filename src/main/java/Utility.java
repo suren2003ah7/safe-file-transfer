@@ -1,4 +1,5 @@
 package main.java;
+
 import main.java.exception.FieldNotPrimeException;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ public class Utility {
     public static Long generatePrime(){
         int n = 168;
         ArrayList<Long> list = firstNPrimes(n);
-        int index = (int)(Math.random() * n) + 1;;
+        int index = (int) Math.floor(Math.random() * n);
         return list.get(index);
     }
 
@@ -84,21 +85,41 @@ public class Utility {
         return true;
     }
 
-//    Utility to generate first n prime numbers
+    public static Long[] stringToLongArray(String str){
+        ArrayList<Long> arrayList = new ArrayList<>();
+        int j = 0;
+        for (int i = 0; i < str.length(); i++){
+            if (str.charAt(i) == ' '){
+                arrayList.add(Long.parseLong(str.substring(j, i)));
+                j = i + 1;
+            }
+            else if (i == str.length() - 1)
+                arrayList.add(Long.parseLong(str.substring(j)));
+        }
+        Long[] result = new Long[arrayList.size()];
+        for (int i = 0; i < result.length; i++)
+            result[i] = arrayList.get(i);
+        return result;
+    }
+
+    public static String longArrayToString(Long[] arr){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < arr.length - 1; i++){
+            sb.append(arr[i].toString()).append(" ");
+        }
+        sb.append(arr[arr.length - 1].toString());
+        return sb.toString();
+    }
+
     private static ArrayList<Long> firstNPrimes(long n){
         ArrayList<Long> primes = new ArrayList<>();
         for (long i = 1; i < 1000; i ++){
-//            if the number is 2 or it is not 1 and it isn't even
             if(i == 2 || (i != 1 && i % 2 == 1)) {
-//                if the number is to then add to the list
                 if(i == 2) {
                     primes.add(i);
                 }
-//                otherwise if the number is not 2
                 else {
                     if (primes.size() == n) break;
-//                    loop over all numbers up to square root of i until finding a divisor
-//                    if reaches square root and doesn't find a divisor add the number to the list
                     for(int j = 1; j <= (int) Math.sqrt(i); j ++){
                         if(j > 1 && i % j == 0){
                             break;
@@ -120,14 +141,4 @@ public class Utility {
         }
         return true;
     }
-/*
-//    find prime factors of number n
-    private static ArrayList<Long> primeFactors(long n){
-        ArrayList<Long> list = firstNPrimes(n);
-        for(int i = 0; i < list.size(); i ++){
-            if((long)n % list.get(i) != 0) list.remove(i--);
-        }
-        return list;
-    }
- */
 }

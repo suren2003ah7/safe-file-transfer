@@ -36,7 +36,10 @@ public class RSA {
     public Long[] encrypt(String plaintext, Long[] publicKey){
         if (!Utility.isMessageValid(plaintext))
             throw new IllegalArgumentException("Message should only contain ASCII characters");
-        Long[] domain = convertStringToLongArray(plaintext);
+        return encrypt(convertStringToLongArray(plaintext), publicKey);
+    }
+
+    public Long[] encrypt(Long[] domain, Long[] publicKey){
         for (int i = 0; i < domain.length; i++)
             domain[i] = Utility.power(domain[i], publicKey[0], publicKey[1]);
         return domain;
@@ -48,6 +51,14 @@ public class RSA {
         for (Long aLong : cipher)
             sb.append((char) Utility.power(aLong, privateKey[0], N).intValue());
         return sb.toString();
+    }
+
+    public Long[] decryptSignature(Long[] cipher){
+        Long[] result = new Long[2];
+        Long N = privateKey[1] * privateKey[2];
+        for (int i = 0; i < result.length; i++)
+            result[i] = Utility.power(cipher[i], privateKey[0], N);
+        return result;
     }
 
     private Long[] convertStringToLongArray(String text){

@@ -1,2 +1,0 @@
-This is a test text file.
-You can freely modify the contents of this file and write your desired message.
