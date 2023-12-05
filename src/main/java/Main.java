@@ -72,26 +72,26 @@ public class Main {
                     receiverPublicKey[0] = sc.nextLong();
                     System.out.println("Insert the second parameter (N) of the receiver's public key.");
                     receiverPublicKey[1] = sc.nextLong();
-                    Long[] onlyEncryption = encrypt(plaintext, receiverPublicKey);
+                    Long[] onlyEncryption = rsa.encrypt(plaintext, receiverPublicKey);
                     String onlyEncryptionText = Utility.longArrayToString(onlyEncryption);
                     System.out.println(onlyEncryptionText);
                     FileManager.writeToFile(CIPHERTEXT_TO_BE_SENT_PATH, onlyEncryptionText);
                     break;
                 case 2:
-                    Long[] onlySignature = sign(plaintext);
+                    Long[] onlySignature = dsa.sign(plaintext);
                     String onlySignatureText = Utility.longArrayToString(onlySignature);
                     System.out.println(onlySignatureText);
                     FileManager.writeToFile(SIGNATURE_TO_BE_SENT_PATH, onlySignatureText);
                     break;
                 case 3:
-                    Long[] signature = sign(plaintext);
+                    Long[] signature = dsa.sign(plaintext);
                     Long[] receiverPublicKeyForBoth = new Long[2];
                     System.out.println("Insert the first parameter (e) of the receiver's public key.");
                     receiverPublicKeyForBoth[0] = sc.nextLong();
                     System.out.println("Insert the second parameter (N) of the receiver's public key.");
                     receiverPublicKeyForBoth[1] = sc.nextLong();
-                    Long[] plaintextEncryption = encrypt(plaintext, receiverPublicKeyForBoth);
-                    Long[] signatureEncryption = encrypt(signature, receiverPublicKeyForBoth);
+                    Long[] plaintextEncryption = rsa.encrypt(plaintext, receiverPublicKeyForBoth);
+                    Long[] signatureEncryption = rsa.encrypt(signature, receiverPublicKeyForBoth);
                     String plaintextEncryptionText = Utility.longArrayToString(plaintextEncryption);
                     String signatureEncryptionText = Utility.longArrayToString(signatureEncryption);
                     System.out.println("Plaintext encryption");
@@ -102,7 +102,7 @@ public class Main {
                     FileManager.writeToFile(SIGNATURE_CIPHER_TO_BE_SENT_PATH, signatureEncryptionText);
                     break;
                 case 4:
-                    String decrypted = decrypt(cipher);
+                    String decrypted = rsa.decrypt(cipher);
                     System.out.println(decrypted);
                     FileManager.writeToFile(RECEIVED_MESSAGE_PATH, decrypted);
                     break;
@@ -110,9 +110,9 @@ public class Main {
                     System.out.println(verify(receivedMessage, receivedSignature));
                     break;
                 case 6:
-                    String message = decrypt(cipher);
+                    String message = rsa.decrypt(cipher);
                     System.out.println("Decrypted message: " + message);
-                    Long[] decryptedSignature = decryptSignature(receivedCipherSignature);
+                    Long[] decryptedSignature = rsa.decryptSignature(receivedCipherSignature);
                     String decryptedSignatureText = Utility.longArrayToString(decryptedSignature);
                     System.out.println(verify(message, decryptedSignature));
                     FileManager.writeToFile(RECEIVED_MESSAGE_PATH, message);
@@ -158,26 +158,6 @@ public class Main {
     private static void printLongArray(Long[] arr){
         for (Long aLong : arr)
             System.out.println(aLong.toString());
-    }
-
-    private static Long[] encrypt(String plaintext, Long[] receiverPublicKey){
-        return rsa.encrypt(plaintext, receiverPublicKey);
-    }
-
-    private static Long[] encrypt(Long[] signature, Long[] receiverPublicKey){
-        return rsa.encrypt(signature, receiverPublicKey);
-    }
-
-    private static String decrypt(Long[] cipher){
-        return rsa.decrypt(cipher);
-    }
-
-    private static Long[] decryptSignature(Long[] cipher){
-        return rsa.decryptSignature(cipher);
-    }
-
-    private static Long[] sign(String plaintext){
-        return dsa.sign(plaintext);
     }
 
     private static boolean verify(String message, Long[] signature) {
