@@ -1,6 +1,7 @@
 package main.java.cipher;
 
 import main.java.Utility;
+import main.java.exception.MessageNotValidException;
 
 public class RSA {
     private final Long[] publicKey;
@@ -35,7 +36,7 @@ public class RSA {
 
     public Long[] encrypt(String plaintext, Long[] publicKey){
         if (!Utility.isMessageValid(plaintext))
-            throw new IllegalArgumentException("Message should only contain ASCII characters");
+            throw new MessageNotValidException("Message should only contain ASCII characters");
         return encrypt(convertStringToLongArray(plaintext), publicKey);
     }
 
