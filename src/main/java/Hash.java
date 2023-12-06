@@ -26,12 +26,4 @@ public class Hash {
         }
         return result;
     }
-
-    private static String bytesToHex(byte[] bytes) {
-        StringBuilder hexStringBuilder = new StringBuilder();
-        for (byte b : bytes) {
-            hexStringBuilder.append(String.format("%02X", b));
-        }
-        return hexStringBuilder.toString();
-    }
 }
