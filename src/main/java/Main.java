@@ -47,15 +47,7 @@ public class Main {
         }
         main:
         while (true){
-            System.out.println("1: Encrypt only.");
-            System.out.println("2: Sign only.");
-            System.out.println("3: Sign and encrypt.");
-            System.out.println("4: Decrypt only.");
-            System.out.println("5: Verify only.");
-            System.out.println("6: Decrypt and verify.");
-            System.out.println("7: Get RSA public key.");
-            System.out.println("8: Get DSA public key.");
-            System.out.println("9: Quit.");
+            printOptionsMessage();
             int init = sc.nextInt();
             String plaintext = FileManager.readFile(MESSAGE_TO_BE_SENT_PATH);
             String ciphertext = FileManager.readFile(RECEIVED_CIPHERTEXT_PATH);
@@ -65,7 +57,7 @@ public class Main {
             Long[] receivedSignature = Utility.stringToLongArray(receivedSignatureText);
             String receivedCipherSignatureText = FileManager.readFile(RECEIVED_CIPHER_SIGNATURE_PATH);
             Long[] receivedCipherSignature = Utility.stringToLongArray(receivedCipherSignatureText);
-            switch (init){
+            switch (init) {
                 case 1:
                     Long[] receiverPublicKey = new Long[2];
                     System.out.println("Insert the first parameter (e) of the receiver's public key.");
@@ -134,7 +126,7 @@ public class Main {
         }
     }
 
-    private static void generateRSAAndDSA(int choice){
+    private static void generateRSAAndDSA(int choice) {
         switch (choice){
             case 1:
                 rsa = new RSA();
@@ -164,5 +156,17 @@ public class Main {
         System.out.println("Insert the third parameter (root) of the sender's public key.");
         senderPublicKey[2] = sc.nextLong();
         return dsa.verify(message, senderPublicKey, signature);
+    }
+
+    private static void printOptionsMessage() {
+        System.out.println("1: Encrypt only.");
+        System.out.println("2: Sign only.");
+        System.out.println("3: Sign and encrypt.");
+        System.out.println("4: Decrypt only.");
+        System.out.println("5: Verify only.");
+        System.out.println("6: Decrypt and verify.");
+        System.out.println("7: Get RSA public key.");
+        System.out.println("8: Get DSA public key.");
+        System.out.println("9: Quit.");
     }
 }
