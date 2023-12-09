@@ -2,9 +2,9 @@
 
 ## Table of contents
 * [DESCRIPTION](#DESCRIPTION)
-* [HOW THE PROGRAM WORKS](#HOW THE PROGRAM WORKS)
-* [IMPORTANT NOTES](#IMPORTANT NOTES)
-* [HOW TO RUN THE PROGRAM](#HOW TO RUN THE PROGRAM)
+* [HOW THE PROGRAM WORKS](#WORKS)
+* [IMPORTANT NOTES](#NOTES)
+* [HOW TO RUN THE PROGRAM](#RUN)
 
 ## DESCRIPTION
     The program allows encryption, decryption, signature and verification of text files. 
