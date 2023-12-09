@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    private static final String INTRO_TEXT = "Hello and welcome to safe file transfer! Please choose a method for " +
-            "generating public and private keys! Write your desired message in the message_to_be_sent.txt file located in " +
-            "resources folder. You can only use ASCII characters for your messages!";
+    private static final String INTRO_TEXT = "Hello and welcome to safe file transfer!\nPlease choose a method for " +
+            "generating public and private keys!\nWrite your desired message in the message_to_be_sent.txt file located in " +
+            "resources folder.\nYou can only use ASCII characters for your messages!";
 
     private static final String INVALID_INPUT = "Invalid input!";
 
