@@ -1,23 +1,23 @@
 # safe-file-transfer
 
 ## Table of contents
-* [DESCRIPTION](#Desc)
-* [HOW THE PROGRAM WORKS](#Works)
-* [IMPORTANT NOTES](#Notes)
-* [HOW TO RUN THE PROGRAM](#Run)
+* [DESCRIPTION](#DESCRIPTION)
+* [HOW THE PROGRAM WORKS](#HOW THE PROGRAM WORKS)
+* [IMPORTANT NOTES](#IMPORTANT NOTES)
+* [HOW TO RUN THE PROGRAM](#HOW TO RUN THE PROGRAM)
 
-## Desc 
+## DESCRIPTION
     The program allows encryption, decryption, signature and verification of text files. 
     Using this program you can do encryption and decryption of a text file using RSA. 
     Sign the file and verify the signature by DSA algorithm.
     The hash function used is SHA 256.
 
-## Works
+## HOW THE PROGRAM WORKS
     The algorithm translates the text file consisting of valid ASCII characters into an array of longs, and
     treats each element of the array as a separate message, also allows to do both at the same time (sign and 
     encrypt, decrypt and verify). All necessary text files that should be used are located in the resources folder
 
-## Notes
+## IMPORTANT NOTES
 *   The messages should include only **ASCII** characters
 *   The program is **NOT** practical for large keys (try to stick to max 3-digit keys) and long messages
 *   The program **doesn't always validate the input**, so the user is expected to provide valid input
@@ -29,7 +29,7 @@
 *   If you are not done with the program make sure not to quit\, otherwise you have to perform all the
     actions again, since new private keys are generated everytime you run the program
 
-## Run
+## HOW TO RUN THE PROGRAM
 ### 1) Run the main method from the Main class:
 *     You get two options for key generation:
   *         1. Automatic generation
